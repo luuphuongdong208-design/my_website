@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Lớp 12A5</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(to right, #ffc1e3, #ffb6c1); /* nền hồng pastel sến súa */
+    overflow-x: hidden;
+}
+
+header {
+    background: linear-gradient(45deg, #ff69b4, #ff1493); /* gradient hồng rực rỡ */
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    width: 95%;
+    max-width: 1000px;
+    margin: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.card {
+    background: #ffe4f0; /* hồng nhạt cho card */
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(255,105,180,0.4); /* bóng hồng */
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.card img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.card img:hover {
+    transform: scale(1.05);
+}
+
+.card p {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.message {
+    background: #ffd6e8;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    text-align: left;
+}
+
+button {
+    background: #ff69b4;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+/* Popup full-screen ảnh */
+#imagePopup {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(255,182,193,0.95); /* hồng mờ sến súa */
+    z-index: 10002;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#imagePopup img {
+    width: 100%;
+    height: 70%;
+    object-fit: contain;
+    margin-bottom: 10px;
+    border-radius: 15px;
+}
+
+/* Popup bình chọn trong ảnh */
+#voteBox {
+    background: #ffe4f0;
+    padding: 10px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+#fireworksCanvas {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+}
+
+@media (max-width: 600px) {
+    .card img { max-width: 100%; }
+    #imagePopup img { height: 60%; }
+}
+</style>
+</head>
+
+<body>
+<canvas id="fireworksCanvas"></canvas>
+
+<header>
+    <h1>Lớp 12A5</h1>
+    <p>Đoàn kết - Nỗ lực - Thành công</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+    <h2>Giới thiệu lớp 12A5</h2>
+    <p>Lớp 12A5 gồm 43 học sinh, 7 nam và 36 nữ, thân thiện, hòa đồng, luôn giúp nhau học tập và hoạt động tập thể. Chúng tôi tự hào về sự đoàn kết và tinh thần năng động của lớp.</p>
+</div>
+
+<div class="card">
+    <h2>Thành viên nổi bật</h2>
+    <p>Mỗi bạn học sinh đều có nét riêng, từ giỏi văn, toán đến năng khiếu văn nghệ, thể thao. Lớp luôn hỗ trợ nhau để mọi thành viên phát triển tốt nhất.</p>
+</div>
+
+<div class="card">
+    <h2>Ảnh ba năm cấp 3</h2>
+    <h3>Lớp 10</h3>
+    <img src="images/lop10.jpg" alt="Ảnh lớp 10" onclick="openImage(this.src)">
+    <p>Những ngày đầu tiên, còn bỡ ngỡ nhưng đầy háo hức. Cả lớp cùng nhau làm quen, vui chơi, và xây dựng tình bạn đầu đời gắn kết.</p>
+
+    <h3>Lớp 11</h3>
+    <img src="images/lop11.jpg" alt="Ảnh lớp 11" onclick="openImage(this.src)">
+    <p>Năm thứ hai, lớp trưởng, lớp phó và các hoạt động ngoại khóa tạo ra nhiều kỷ niệm đáng nhớ. Mọi người ngày càng thân thiết hơn, chia sẻ khó khăn và niềm vui.</p>
+
+    <h3>Lớp 12</h3>
+    <img src="images/lop12.jpg" alt="Ảnh lớp 12" onclick="openImage(this.src)">
+    <p>Năm cuối cấp, lớp 12A5 đã trở thành một gia đình thật sự. Cùng nhau học tập, vui chơi, tham gia hoạt động, lưu giữ những khoảnh khắc cuối cùng đáng nhớ trước khi tốt nghiệp.</p>
+</div>
+
+<div class="card">
+    <h2>Hoạt động nổi bật</h2>
+    <img src="images/ngaynhagia.jpg" alt="Ngày Nhà giáo Việt Nam" onclick="openImage(this.src)">
+    <p>Ngày Nhà giáo Việt Nam: Tri ân thầy cô tận tâm với bó hoa và lời chúc đầy tình cảm.</p>
+
+    <img src="images/ngaydanong.jpg" alt="Ngày Đàn Ông" onclick="openImage(this.src)">
+    <p>Ngày Đàn Ông: Vui chơi và chúc mừng các bạn nam, tràn đầy năng lượng.</p>
+
+    <img src="images/banhchung.jpg" alt="Ngày Nấu Bánh Chưng" onclick="openImage(this.src)">
+    <p>Ngày Nấu Bánh Chưng: Cả lớp cùng nhau gói bánh, học hỏi truyền thống và tạo khoảnh khắc gắn kết.</p>
+
+    <img src="images/vannghe.jpg" alt="Ngày Diễn Văn Nghệ" onclick="openImage(this.src)">
+    <p>Ngày Diễn Văn Nghệ: Biểu diễn tiết mục công phu, thể hiện tinh thần sáng tạo và đoàn kết.</p>
+</div>
+
+<div class="card">
+    <h2>Lời nhắn gửi lớp ❤️</h2>
+    <div id="messageList"></div>
+</div>
+
+</div>
+
+<!-- Popup ảnh + bình chọn -->
+<div id="imagePopup" onclick="closeImage()">
+    <img id="popupImg" src="">
+    <div id="voteBox" onclick="event.stopPropagation()">
+        <p>Mức độ yêu thích:</p>
+        <select id="level">
+            <option>Thích</option>
+            <option>Hơi thích</option>
+            <option>Bình thường</option>
+        </select>
+        <p>Lời nhắn:</p>
+        <textarea id="message" placeholder="Nhập lời nhắn" style="width:100%; height:60px;"></textarea>
+        <br>
+        <button onclick="submitVote()">Gửi</button>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 Lớp 12A5</p>
+</footer>
+
+<script>
+// Lời nhắn
+function submitVote() {
+    const level = document.getElementById('level').value;
+    const message = document.getElementById('message').value.trim();
+    if(!message){ alert("Vui lòng nhập lời nhắn"); return;}
+    const data = JSON.parse(localStorage.getItem('votes'))||[];
+    data.push({level,message});
+    localStorage.setItem('votes', JSON.stringify(data));
+    document.getElementById('message').value='';
+    showMessages();
+    alert("Cảm ơn! Lời nhắn đã gửi ❤️");
+}
+
+function showMessages() {
+    const list = document.getElementById('messageList');
+    list.innerHTML='';
+    const data = JSON.parse(localStorage.getItem('votes'))||[];
+    data.forEach(item=>{
+        const div=document.createElement('div');
+        div.className='message';
+        div.innerHTML=`<b>${item.level}</b><br>${item.message}`;
+        list.appendChild(div);
+    });
+}
+document.addEventListener('DOMContentLoaded',showMessages);
+
+function openImage(src){document.getElementById('popupImg').src=src;document.getElementById('imagePopup').style.display='flex';}
+function closeImage(){document.getElementById('imagePopup').style.display='none';}
+
+// ==== Pháo hoa ====
+const canvas=document.getElementById('fireworksCanvas');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let particles=[];
+function random(min,max){return Math.random()*(max-min)+min;}
+class Particle{
+    constructor(x,y,color){
+        this.x=x; this.y=y; this.color=color;
+        this.radius=random(2,4);
+        this.velX=random(-3,3);
+        this.velY=random(-7,-3);
+        this.alpha=1;
+        this.gravity=0.05;
+    }
+    update(){
+        this.velY+=this.gravity;
+        this.x+=this.velX;
+        this.y+=this.velY;
+        this.alpha-=0.01;
+    }
+    draw(){
+        ctx.globalAlpha=this.alpha;
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
+        ctx.fillStyle=this.color;
+        ctx.fill();
+        ctx.globalAlpha=1;
+    }
+}
+function createFirework(){
+    const x=random(100,canvas.width-100);
+    const y=random(50,canvas.height/2);
+    const colors=['#ff69b4','#ff1493','#ffb6c1','#ffc0cb','#ff8da1','#ff5c8d','#ff3399'];
+    for(let i=0;i<50;i++){particles.push(new Particle(x,y,colors[Math.floor(Math.random()*colors.length)]));}
+}
+function animate(){
+    ctx.fillStyle='rgba(255,192,203,0.1)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    particles.forEach((p,i)=>{
+        p.update(); p.draw();
+        if(p.alpha<=0){particles.splice(i,1);}
+    });
+    requestAnimationFrame(animate);
+}
+setInterval(createFirework,800);
+animate();
+window.addEventListener('resize',()=>{
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+});
+</script>
+
+</body>
+</html>
